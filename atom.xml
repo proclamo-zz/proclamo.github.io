@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Cristian Martin Mouat's Site]]></title>
+  <subtitle><![CDATA[Some boring stuff]]></subtitle>
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://proclamo.github.io/"/>
+  <updated>2015-11-07T01:06:06.000Z</updated>
+  <id>http://proclamo.github.io/</id>
+  
+  <author>
+    <name><![CDATA[Cristian Martin Mouat]]></name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Optimize with data structures]]></title>
+    <link href="http://proclamo.github.io/2015/11/06/optimize-with-data-structures/"/>
+    <id>http://proclamo.github.io/2015/11/06/optimize-with-data-structures/</id>
+    <published>2015-11-06T22:46:20.000Z</published>
+    <updated>2015-11-07T01:06:06.000Z</updated>
+    <content type="html"><![CDATA[<p>At job, we are developing a project with React. The main component is a tab component with a grid inside, each one builded with data from a Postgres database. The dataset may change his representation for each case, this is why we don’t prepare the data in server side. We need loop<br>over the data and build an apropiate data structure in client side.</p>
+<p>This is the raw data:</p>
+<figure class="highlight json"><figcaption><span>data.json</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">metadata</span>": <span class="value">[&#123;</span><br><span class="line">    "<span class="attribute">code_estation</span>": <span class="value"><span class="string">"A1"</span></span>,</span><br><span class="line">    "<span class="attribute">name</span>": <span class="value"><span class="string">"Blah blah' Station"</span></span>,    </span><br><span class="line">    "<span class="attribute">some_property</span>": <span class="value"><span class="number">4</span></span>,</span><br><span class="line">    "<span class="attribute">another_property</span>": <span class="value"><span class="number">17</span></span><br><span class="line">  </span>&#125;, &#123;</span><br><span class="line">    "<span class="attribute">code</span>": <span class="value"><span class="string">"B1"</span></span>,</span><br><span class="line">    "<span class="attribute">name</span>": <span class="value"><span class="string">"Blah bleh bloh' Station"</span></span>,  </span><br><span class="line">    "<span class="attribute">some_property</span>": <span class="value"><span class="number">4</span></span>,</span><br><span class="line">    "<span class="attribute">another_property</span>": <span class="value"><span class="number">5</span></span><br><span class="line">  </span>&#125;,</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">data</span>":<span class="value">[&#123;</span><br><span class="line">    "<span class="attribute">id_estation</span>":<span class="value"><span class="number">148</span></span>,</span><br><span class="line">    "<span class="attribute">code_station</span>":<span class="value"><span class="string">"A1"</span></span>,</span><br><span class="line">    "<span class="attribute">id_variable</span>":<span class="value"><span class="number">4</span></span>,</span><br><span class="line">    "<span class="attribute">value</span>":<span class="value"><span class="string">"21.8"</span></span>,</span><br><span class="line">    "<span class="attribute">date</span>":<span class="value"><span class="string">"2015-10-01T07:00:00.000Z"</span></span><br><span class="line">  </span>&#125;, &#123;</span><br><span class="line">    "<span class="attribute">id_estation</span>":<span class="value"><span class="number">149</span></span>,</span><br><span class="line">    "<span class="attribute">code_station</span>":<span class="value"><span class="string">"B1"</span></span>,</span><br><span class="line">    "<span class="attribute">id_variable</span>":<span class="value"><span class="number">4</span></span>,</span><br><span class="line">    "<span class="attribute">value</span>":<span class="value"><span class="string">"20.1"</span></span>,</span><br><span class="line">    "<span class="attribute">date</span>":<span class="value"><span class="string">"2015-10-01T07:00:00.000Z"</span></span><br><span class="line">  </span>&#125;, &#123;</span><br><span class="line">    "<span class="attribute">id_estation</span>":<span class="value"><span class="number">148</span></span>,</span><br><span class="line">    "<span class="attribute">code_station</span>":<span class="value"><span class="string">"A1"</span></span>,</span><br><span class="line">    "<span class="attribute">id_variable</span>":<span class="value"><span class="number">4</span></span>,</span><br><span class="line">    "<span class="attribute">value</span>":<span class="value"><span class="string">"17.2"</span></span>,</span><br><span class="line">    "<span class="attribute">date</span>":<span class="value"><span class="string">"2015-10-02T07:00:00.000Z"</span></span><br><span class="line">  </span>&#125;, &#123;</span><br><span class="line">    "<span class="attribute">id_estation</span>":<span class="value"><span class="number">149</span></span>,</span><br><span class="line">    "<span class="attribute">code_station</span>":<span class="value"><span class="string">"B1"</span></span>,</span><br><span class="line">    "<span class="attribute">id_variable</span>":<span class="value"><span class="number">4</span></span>,</span><br><span class="line">    "<span class="attribute">value</span>":<span class="value"><span class="string">"18.5"</span></span>,</span><br><span class="line">    "<span class="attribute">date</span>":<span class="value"><span class="string">"2015-10-02T07:00:00.000Z"</span></span><br><span class="line">  </span>&#125;</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">  ]</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<p>We want a grid with each station in columns, dates in rows and values in cells:</p>
+<p><br></p>
+
+<div style="width:100%;">
+  <table style="width:50%;margin: 0px auto;">
+    <tr>
+      <th>Date</th>
+      <th>A1</th>
+      <th>B1</th>
+      <th>...</th>
+    </tr>
+    <tr>
+      <th>2015-10-01</th>
+      <td>21.8</td>
+      <td>23.4</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2015-10-02</th>
+      <td>17.2</td>
+      <td>18.5</td>
+      <td>...</td>
+    </tr>  
+  </table>
+
+  <br>
+
+  <p style="text-align: center;">This is suposed to have the date filtered by <i>id_variable = 4</i></p>
+
+</div>
+
+<p><br></p>
+<p>The first approach was to filter directly the data along what we need.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>At job, we are developing a project with React. The main component is a tab component with a grid inside, each one builded with data from]]>
+    </summary>
+    
+      <category term="data structures" scheme="http://proclamo.github.io/tags/data-structures/"/>
+    
+      <category term="optimization" scheme="http://proclamo.github.io/tags/optimization/"/>
+    
+      <category term="javascript" scheme="http://proclamo.github.io/categories/javascript/"/>
+    
+  </entry>
+  
+</feed>
