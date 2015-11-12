@@ -1,26 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title><![CDATA[Cristian Martin Mouat's Site]]></title>
-  <subtitle><![CDATA[This blog is under construction]]></subtitle>
-  <link href="/atom.xml" rel="self"/>
-  <link href="http://proclamo.github.io/"/>
-  <updated>2015-11-12T21:06:39.000Z</updated>
-  <id>http://proclamo.github.io/</id>
+<search>
   
-  <author>
-    <name><![CDATA[Cristian Martin Mouat]]></name>
+  
     
-  </author>
-  
-  <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title><![CDATA[How to use crossfilter with react, alt and webpack]]></title>
-    <link href="http://proclamo.github.io/2015/11/12/how-to-use-crossfilter-with-react-alt-and-webpack/"/>
-    <id>http://proclamo.github.io/2015/11/12/how-to-use-crossfilter-with-react-alt-and-webpack/</id>
-    <published>2015-11-12T20:37:11.000Z</published>
-    <updated>2015-11-12T21:06:39.000Z</updated>
-    <content type="html"><![CDATA[<p>I’ve made a simple experiment of how to combining <a href="http://square.github.io/crossfilter/" target="_blank" rel="external">crossfilter</a> and <a href="https://facebook.github.io/react/index.html" target="_blank" rel="external">React</a> in an <a href="https://facebook.github.io/flux/" target="_blank" rel="external">flux</a> environment with the help of <a href="http://alt.js.org/" target="_blank" rel="external">alt</a>, all of them builded with <a href="https://webpack.github.io/" target="_blank" rel="external">webpack</a>.</p>
+    <entry>
+      <title><![CDATA[How to use crossfilter with react, alt and webpack]]></title>
+      <url>http://proclamo.github.io/2015/11/12/how-to-use-crossfilter-with-react-alt-and-webpack/</url>
+      <content type="html"><![CDATA[<p>I’ve made a simple experiment of how to combining <a href="http://square.github.io/crossfilter/" target="_blank" rel="external">crossfilter</a> and <a href="https://facebook.github.io/react/index.html" target="_blank" rel="external">React</a> in an <a href="https://facebook.github.io/flux/" target="_blank" rel="external">flux</a> environment with the help of <a href="http://alt.js.org/" target="_blank" rel="external">alt</a>, all of them builded with <a href="https://webpack.github.io/" target="_blank" rel="external">webpack</a>.</p>
 <p>This experiment also ilustrates how to prepare a minimun and production ready setup for any react and flux project. The source code of project <a href="https://github.com/proclamo/crossreact" target="_blank" rel="external">is hosted in github</a>.</p>
 <h2 id="The_experiment">The experiment</h2><p>You can view the experiment running <a href="http://bl.ocks.org/proclamo/371dcca64a217154c956" target="_blank" rel="external">in a block</a>.</p>
 <p>I’ve charged a dataset of the <a href="http://opendata.bcn.cat/opendata/es/catalog" target="_blank" rel="external">public office Open Data from Barcelona</a> with urbanistic data of blocks city (<a href="http://opendata.bcn.cat/opendata/es/descarrega-fitxer?url=http%3a%2f%2fbismartopendata.blob.core.windows.net%2fopendata%2fopendata%2fmap_illa_0_opendata_map_illa.csv&amp;name=MAP_ILLA.csv" target="_blank" rel="external">the dataset</a> has around 5k rows of data).</p>
@@ -52,22 +38,23 @@
 <p>I also have installed too a plugin, the <a href="https://github.com/webpack/extract-text-webpack-plugin" target="_blank" rel="external">extract-text-webpack-plugin</a> wich extracts the parsed files into a separated file. In this case, the css is not bundled inside the index.html, it is builded in the styles.css file.</p>
 <p>I use the <a href="https://github.com/ampedandwired/html-webpack-plugin" target="_blank" rel="external">HtmlWebPackPlugin</a> for create the main html file with the links to css and javascript bundles.</p>
 ]]></content>
-    <summary type="html">
-    <![CDATA[<p>I’ve made a simple experiment of how to combining <a href="http://square.github.io/crossfilter/" target="_blank" rel="external">crossfilt]]>
-    </summary>
+    </entry>
     
-      <category term="alt" scheme="http://proclamo.github.io/tags/alt/"/>
-    
-      <category term="crossfilter" scheme="http://proclamo.github.io/tags/crossfilter/"/>
-    
-      <category term="flux" scheme="http://proclamo.github.io/tags/flux/"/>
-    
-      <category term="react" scheme="http://proclamo.github.io/tags/react/"/>
-    
-      <category term="webpack" scheme="http://proclamo.github.io/tags/webpack/"/>
-    
-      <category term="javascript" scheme="http://proclamo.github.io/categories/javascript/"/>
-    
-  </entry>
   
-</feed>
+  
+    
+    <entry>
+      <title><![CDATA[Who I am?]]></title>
+      <url>http://proclamo.github.io/about/index.html</url>
+      <content type="html"><![CDATA[<p>My name is Cristian Martin Mouat, I am a developer from Spain. I could be classified as a full stack developer. I think in javascript, I do webs in PHP with Symfony and I work with Java.</p>
+<p>After several years trying to create and market products, I have noticed that I have neglected my personal brand. I want to improve my english too, this is why I started this blog.</p>
+<ul>
+<li>My <a href="https://twitter.com/sevave" target="_blank" rel="external">twitter</a></li>
+<li>My <a href="https://github.com/proclamo" target="_blank" rel="external">github</a></li>
+<li>My <a href="http://bl.ocks.org/proclamo" target="_blank" rel="external">blocks</a></li>
+</ul>
+]]></content>
+    </entry>
+    
+  
+</search>
